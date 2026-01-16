@@ -144,10 +144,21 @@ body::after {
   }
 }
 
-/* Mobile tap-to-expand */
+/* Mobile styles */
 @media (max-width: 768px) {
   body {
     padding: 10px;
+  }
+
+  body::after {
+    background:
+      linear-gradient(rgba(255,182,193,0.2), rgba(255,228,225,0.2)),
+      url("bunga.png") left center no-repeat,
+      url("bunga.png") right center no-repeat;
+    background-size:
+      cover,
+      150px auto,
+      150px auto;
   }
 
   .container {
@@ -169,24 +180,15 @@ body::after {
     border-radius: 15px;
   }
 
-  /* Text tetap hidden, tunggu tap */
-  .container li .content span {
-    transform: scale(0.85);
-    opacity: 0;
-    visibility: hidden;
-  }
-
-  /* Active/tap state - expand card */
-  .container li:active,
-  .container li:focus {
+  /* Expanded state - controlled by JavaScript */
+  .container li.expanded {
     flex: 0 0 250px;
     min-width: 250px;
     transform: scale(1.02);
     z-index: 10;
   }
 
-  .container li:active .content span,
-  .container li:focus .content span {
+  .container li.expanded .content span {
     transform: scale(1);
     opacity: 1;
     visibility: visible;
@@ -200,14 +202,16 @@ body::after {
   .container p {
     font-size: 11px;
   }
-
-  /* Remove background decorations on mobile */
-  body::after {
-    background: linear-gradient(rgba(255,182,193,0.2), rgba(255,228,225,0.2));
-  }
 }
 
 @media (max-width: 480px) {
+  body::after {
+    background-size:
+      cover,
+      100px auto,
+      100px auto;
+  }
+
   .container {
     height: 240px;
     gap: 6px;
@@ -219,8 +223,7 @@ body::after {
     border-radius: 12px;
   }
 
-  .container li:active,
-  .container li:focus {
+  .container li.expanded {
     flex: 0 0 220px;
     min-width: 220px;
   }
