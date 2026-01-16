@@ -144,7 +144,7 @@ body::after {
   }
 }
 
-/* Mobile optimizations */
+/* Mobile tap-to-expand */
 @media (max-width: 768px) {
   body {
     padding: 10px;
@@ -163,14 +163,30 @@ body::after {
   }
 
   .container li {
-    flex: 0 0 180px;
-    min-width: 180px;
+    flex: 0 0 100px;
+    min-width: 100px;
     scroll-snap-align: center;
     border-radius: 15px;
   }
 
-  /* Show content by default on mobile */
+  /* Text tetap hidden, tunggu tap */
   .container li .content span {
+    transform: scale(0.85);
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  /* Active/tap state - expand card */
+  .container li:active,
+  .container li:focus {
+    flex: 0 0 250px;
+    min-width: 250px;
+    transform: scale(1.02);
+    z-index: 10;
+  }
+
+  .container li:active .content span,
+  .container li:focus .content span {
     transform: scale(1);
     opacity: 1;
     visibility: visible;
@@ -183,11 +199,6 @@ body::after {
 
   .container p {
     font-size: 11px;
-  }
-
-  /* Active state for touch */
-  .container li:active {
-    transform: scale(0.98);
   }
 
   /* Remove background decorations on mobile */
@@ -203,9 +214,15 @@ body::after {
   }
 
   .container li {
-    flex: 0 0 150px;
-    min-width: 150px;
+    flex: 0 0 80px;
+    min-width: 80px;
     border-radius: 12px;
+  }
+
+  .container li:active,
+  .container li:focus {
+    flex: 0 0 220px;
+    min-width: 220px;
   }
 
   .container h2 {
@@ -215,4 +232,4 @@ body::after {
   .container p {
     font-size: 10px;
   }
-} 
+}
